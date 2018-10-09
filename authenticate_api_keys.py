@@ -25,50 +25,48 @@ class api_key_reader():
 		#Digital Ocean configure
 		try:
 			if self.config['digital_ocean_key'] is None: # The variable
-				print('The key is empty skipping')
+				print('The digital ocean key is empty skipping')
+			else:
+				command = 'doctl auth init -t ' + self.config['digital_ocean_key']
+				result = subprocess.call(command, shell=True)
 		except NameError:
-			print ("The digital ocean key is not set. Skipping this step...")
-		else:
-			command = 'doctl auth init -t ' + self.config['digital_ocean_key']
-			result = subprocess.call(command, shell=True)
+			print ("There was an error in getting the keys for digital ocean..")
 
 		#AWS configure
 		try:
 			if self.config['aws_keys']['aws_access_key_id'] is None: # The variable
-				print('The key is empty skipping')
+				print('The aws key is empty skipping')
+			else:
+				command_one = 'aws configure set aws_access_key_id ' + self.config['aws_keys']['aws_access_key_id']
+				command_two = 'aws configure set aws_secret_access_key ' + self.config['aws_keys']['aws_secret_access_key']
+				command_three = 'aws configure set default.region ' + self.config['aws_keys']['default_region']
+				subprocess.call(command_one, shell=True)
+				subprocess.call(command_two, shell=True)
+				subprocess.call(command_three, shell=True)
 		except NameError:
-			print ("The aws key is not set. Skipping this step...")
-		else:
-			command0 = 'aws configure set aws_access_key_id ' + self.config['aws_key']['aws_access_key_id']
-			command1 = 'aws configure set aws_secret_access_key ' + self.config['aws_key']['aws_secret_access_key']
-			command2 = 'aws configure set default.region ' + self.config['aws_key']['default_region']
-
-			subprocess.call(command0, shell=True)
-			subprocess.call(command1, shell=True)
-			subprocess.call(command2, shell=True)
+			print ("There was an error in getting the keys for aws.")
 
 		#Azure configure
 		try:
 			if self.config['azure_keys']['username'] is None: # The variable
-				print('The key is empty skipping')
+				print('The azure key is empty skipping')
+			else:
+				command = 'azure login -u ' + self.config['azure_keys']['username'] + ' -p ' + self.config['azure_keys']['password']
+				subprocess.call(command, shell=True)
+				subprocess.call('azure config mode arm', shell=True)
+				subprocess.call('azure provider register Microsoft.Compute', shell=True)
+				subprocess.call('azure provider register Microsoft.Network', shell=True)
 		except NameError:
-			print ("The Azure username is not set. Skipping this step...")
-		else:
-			command = 'azure login -u ' + self.config['azure_keys']['username'] + ' -p ' + self.config['azure_keys']['password']
-			subprocess.call(command, shell=True)
-			subprocess.call('azure config mode arm', shell=True)
-			subprocess.call('azure provider register Microsoft.Compute', shell=True)
-			subprocess.call('azure provider register Microsoft.Network', shell=True)
+			print ("There was an error in getting the keys for azure.")
 
 		#Openstack configure
 		try:
 			if self.config['openstack'] is None: # The variable
-				print('The key is empty skipping')
+				print('The openstack key is empty skipping')
+			else:
+				command = 'source ' + self.config['openstack']
 		except NameError:
-			print ("The openstack path has not been set. Skipping this step...")
-		else:
-			command = 'source ' + self.config['openstack']
-
+			print ("There was an error in getting the keys for openstack")
 def main():
 	perfkitRun = api_key_reader()
 	perfkitRun.runAuthCommands()

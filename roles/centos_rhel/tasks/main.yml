@@ -66,10 +66,10 @@
   - name: API key configuration and validation
     command: python {{ playbook_dir }}/../authenticate_api_keys.py
   - name: Run bencmarks on digitalocean
-    command: python {{ playbook_dir }}/../bencmarks.py --cloud_provider DigitalOcean
+    command: python {{ playbook_dir }}/../benchmarks.py --cloud_provider DigitalOcean
   - name: Run bencmarks on aws
-    command: python {{ playbook_dir }}/../bencmarks.py --cloud_provider AWS
+    command: python {{ playbook_dir }}/../benchmarks.py --cloud_provider AWS
   - name: Run bencmarks on azure
-    command: python {{ playbook_dir }}/../bencmarks.py --cloud_provider Azure
+    command: python {{ playbook_dir }}/../benchmarks.py --cloud_provider Azure
   - name: Run bencmarks on openstack
-    command: python {{ playbook_dir }}/../bencmarks.py --cloud_provider openstack
+    command: python {{ playbook_dir }}/../benchmarks.py --cloud_provider openstack

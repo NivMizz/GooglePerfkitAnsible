@@ -1,10 +1,9 @@
----
 digital_ocean_key: ""
 aws_keys:
-  aws_access_key_id:
-  aws_secret_access_key:
-  default_region:
+  aws_access_key_id: "abcde"
+  aws_secret_access_key: ''
+  default_region: ''
 azure_keys:
-  username:
-  password:
+  username: null
+  password: null
 openstack:
