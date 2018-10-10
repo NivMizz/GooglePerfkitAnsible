@@ -63,6 +63,8 @@
       - perfkitbenchmarker/providers/openstack/requirements.txt
       - perfkitbenchmarker/providers/aws/requirements.txt
     become: true
+  - name: Install Json2Html
+    command: pip install json2html
   - name: API key configuration and validation
     command: python {{ playbook_dir }}/../authenticate_api_keys.py
   - name: Run bencmarks on digitalocean

@@ -67,6 +67,10 @@ class api_key_reader():
 				command = 'source ' + self.config['openstack']
 		except NameError:
 			print ("There was an error in getting the keys for openstack")
+
+	def runBenchmarks(self):
+		
+
 def main():
 	perfkitRun = api_key_reader()
 	perfkitRun.runAuthCommands()
